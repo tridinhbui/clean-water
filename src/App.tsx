@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import { Navigation } from '@/components/Navigation'
 import { Toaster } from '@/components/ui/toaster'
-import { ErrorBoundary } from '@/components/ErrorBoundary'
+import ErrorBoundary from '@/components/ErrorBoundary'
 import { AnimatedBackground } from '@/components/AnimatedBackground'
 
 // Pages

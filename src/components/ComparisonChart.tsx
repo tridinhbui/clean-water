@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { WaterMetrics } from '@/lib/waterAnalysis';
+import { WaterMetrics } from '@/lib/tensorflow';
 import { BarChart3, TrendingUp, TrendingDown, ArrowLeftRight } from 'lucide-react';
 
 interface Sample {
