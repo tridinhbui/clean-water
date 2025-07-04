@@ -34,16 +34,16 @@ export function ComparisonChart({ beforeSample, afterSample }: ComparisonChartPr
         horizontal: false,
         columnWidth: '60%',
         grouped: true,
-        borderRadius: 4,
+        borderRadius: 3,
       },
     },
     dataLabels: {
       enabled: true,
       formatter: (val: number) => val.toFixed(2),
     },
-    colors: ['#3B82F6', '#10B981'],
+    colors: ['#3B82F6', '#10B981', '#F59E0B', '#EC4899', '#8B5CF6'],
     xaxis: {
-      categories: ['pH', 'Chlorine (ppm)', 'Heavy Metals', 'Turbidity (NTU)'],
+      categories: ['pH', 'Chlorine (ppm)','Bronze', 'Heavy Metals', 'Turbidity (NTU)'],
     },
     yaxis: {
       title: {

@@ -132,7 +132,7 @@ export default function UIDemo() {
             <Card className="glass text-center p-6">
               <div className="float text-4xl mb-4">🌊</div>
               <h4 className="font-semibold text-blue-800 mb-2">Float Animation</h4>
-              <p className="text-sm text-gray-600">Gentle floating motion</p>
+              <p className="text-sm text-gray-600">Gentle floating motions</p>
             </Card>
 
             {/* Pulse Glow */}
