@@ -139,7 +139,7 @@ export function TrendAnalysis({ samples }: TrendAnalysisProps) {
   // Calculate overall water quality trend
   const safetyScores = sortedSamples.map(sample => {
     const safety = assessWaterSafety(sample.metrics);
-    return safety.overall === 'safe' ? 3 : safety.overall === 'warning' ? 2 : 1;
+    return safety.overall === 'safe' ? 3 : safety.overall === 'caution' ? 2 : 1;
   });
 
   const recentSafetyAvg = safetyScores.slice(-3).reduce((sum, score) => sum + score, 0) / Math.min(3, safetyScores.length);

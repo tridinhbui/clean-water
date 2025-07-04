@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState, useCallback, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -33,7 +33,7 @@ interface CameraSettings {
 export default function EnhancedWaterCamera() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const router = useRouter();
+  const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
   const [isCameraActive, setIsCameraActive] = useState(false);
@@ -236,7 +236,7 @@ export default function EnhancedWaterCamera() {
 
     // Navigate to results
     setTimeout(() => {
-      router.push(`/dashboard/${result.sampleId}`);
+      navigate(`/dashboard/${result.sampleId}`);
     }, 1000);
   };
 

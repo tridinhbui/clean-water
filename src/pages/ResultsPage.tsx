@@ -429,7 +429,7 @@ export default function ResultsPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <WaterQualityChart metrics={result.metrics} safety={result.safety} />
+            <WaterQualityChart metrics={result.metrics} />
           </CardContent>
         </Card>
 

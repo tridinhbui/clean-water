@@ -1,81 +1,85 @@
 'use client';
 
-import React from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import React, { Component, ErrorInfo, ReactNode } from 'react';
 import { AlertTriangle, RefreshCw } from 'lucide-react';
 
-interface ErrorBoundaryState {
+interface Props {
+  children: ReactNode;
+  fallback?: ReactNode;
+}
+
+interface State {
   hasError: boolean;
   error?: Error;
 }
 
-interface ErrorBoundaryProps {
-  children: React.ReactNode;
-  fallback?: React.ComponentType<{ error?: Error; reset: () => void }>;
-}
-
-class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  constructor(props: ErrorBoundaryProps) {
+class ErrorBoundary extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+  static getDerivedStateFromError(error: Error): State {
     return { hasError: true, error };
   }
 
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('Error Boundary caught an error:', error, errorInfo);
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error('ErrorBoundary caught an error:', error, errorInfo);
   }
+
+  handleReset = () => {
+    this.setState({ hasError: false, error: undefined });
+  };
 
   render() {
     if (this.state.hasError) {
       if (this.props.fallback) {
-        const FallbackComponent = this.props.fallback;
-        return (
-          <FallbackComponent 
-            error={this.state.error} 
-            reset={() => this.setState({ hasError: false, error: undefined })}
-          />
-        );
+        return this.props.fallback;
       }
 
       return (
-        <div className="min-h-screen flex items-center justify-center p-4">
-          <Card className="max-w-md">
-            <CardHeader className="text-center">
-              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <AlertTriangle className="w-6 h-6 text-red-600" />
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-cyan-50 p-4">
+          <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-6 text-center">
+            <div className="flex justify-center mb-4">
+              <div className="p-3 bg-red-100 rounded-full">
+                <AlertTriangle className="w-8 h-8 text-red-600" />
               </div>
-              <CardTitle>Something went wrong</CardTitle>
-              <CardDescription>
-                We encountered an unexpected error. Please try again.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="text-center space-y-4">
-              {process.env.NODE_ENV === 'development' && this.state.error && (
-                <div className="text-left">
-                  <p className="text-sm font-medium text-gray-700 mb-2">Error details:</p>
-                  <pre className="text-xs bg-gray-100 p-2 rounded overflow-auto max-h-32">
-                    {this.state.error.message}
-                  </pre>
-                </div>
-              )}
-              <div className="flex gap-2 justify-center">
-                <Button
-                  onClick={() => this.setState({ hasError: false, error: undefined })}
-                  variant="outline"
-                >
-                  <RefreshCw className="w-4 h-4 mr-2" />
-                  Try Again
-                </Button>
-                <Button onClick={() => window.location.reload()}>
-                  Reload Page
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+            </div>
+            
+            <h2 className="text-xl font-semibold text-gray-900 mb-2">
+              Something went wrong
+            </h2>
+            
+            <p className="text-gray-600 mb-6">
+              We encountered an unexpected error. Please try refreshing the page.
+            </p>
+
+            <div className="space-y-3">
+              <button
+                onClick={this.handleReset}
+                className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                <RefreshCw className="w-4 h-4" />
+                Try Again
+              </button>
+              
+              <button
+                onClick={() => window.location.reload()}
+                className="w-full border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                Refresh Page
+              </button>
+            </div>
+
+            <details className="mt-4 text-left">
+              <summary className="text-sm text-gray-500 cursor-pointer hover:text-gray-700">
+                Error Details
+              </summary>
+              <pre className="mt-2 text-xs text-gray-600 bg-gray-50 p-2 rounded overflow-auto max-h-32">
+                {this.state.error?.toString()}
+              </pre>
+            </details>
+          </div>
         </div>
       );
     }
@@ -84,4 +88,4 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
   }
 }
 
-export { ErrorBoundary }; 
+export default ErrorBoundary; 

@@ -152,19 +152,19 @@ export function ExportOptions({ samples }: ExportOptionsProps) {
                 <div class="metrics">
                   <div class="metric">
                     <strong>pH:</strong> ${sample.metrics.pH}
-                    <br><small>${safety.pH.message}</small>
+                    <br><small>Status: ${safety.pH}</small>
                   </div>
                   <div class="metric">
                     <strong>Chlorine:</strong> ${sample.metrics.chlorine} ppm
-                    <br><small>${safety.chlorine.message}</small>
+                    <br><small>Status: ${safety.chlorine}</small>
                   </div>
                   <div class="metric">
                     <strong>Heavy Metals:</strong> ${sample.metrics.heavyMetalScore}/10
-                    <br><small>${safety.heavyMetals.message}</small>
+                    <br><small>Status: ${safety.heavyMetal}</small>
                   </div>
                   <div class="metric">
                     <strong>Turbidity:</strong> ${sample.metrics.turbidity} NTU
-                    <br><small>${safety.turbidity.message}</small>
+                    <br><small>Status: ${safety.turbidity}</small>
                   </div>
                 </div>
               </div>
